@@ -1,0 +1,99 @@
+body {
+  background-color: black;
+}
+
+.grid {
+  display: grid;
+  /* gap: 5px; */
+  padding: 10px;
+}
+
+.grid-row {
+  display: flex;
+}
+
+.grid-cell {
+  width: 5rem;
+  height: 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+}
+
+.type-0 {
+  background-color: green;
+}
+
+.type-P {
+  background-color: lightblue;
+}
+
+.type-B {
+  background-color: grey;
+}
+
+.type-C {
+  background-color: gold;
+}
+
+.exit {
+  width: 100%;
+  height: 100%;
+  rotate: 270deg;
+  background-color: green;
+}
+.player-picture {
+  width: 100%;
+  height: 100%;
+}
+
+.horizontal-wall {
+  width: 100%;
+  background-color: green;
+  rotate: 90deg;
+}
+
+.vertical-wall {
+  width: 100%;
+}
+
+.one-corner-wall {
+  width: 100%;
+  rotate: 90deg;
+}
+
+.two-end-wall {
+  width: 100%;
+}
+
+.three-corner-wall {
+  width: 100%;
+}
+
+.four-end-wall {
+  width: 100%;
+  rotate: 90deg;
+}
+
+.six-end-wall {
+  width: 100%;
+  rotate: 270deg;
+}
+
+.seven-corner-wall {
+  width: 100%;
+  background-color: green;
+  rotate: 180deg;
+}
+
+.eight-end-wall {
+  width: 100%;
+  rotate: 180deg;
+}
+
+.nine-corner-wall {
+  width: 100%;
+  rotate: 270deg;
+}
