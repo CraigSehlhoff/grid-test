@@ -1,4 +1,4 @@
-import { useMovement } from "../hooks/useMovement";
+import { useMovement } from "../../../hooks/useMovement";
 import NewGrid from "./maps/grids/NewGridTest";
 
 export default function SuckIt({ grid, p1Pos, setGrid, setP1Pos }) {

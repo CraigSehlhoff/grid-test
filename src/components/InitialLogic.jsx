@@ -1,28 +1,37 @@
-import React, { useState, useEffect, useRef } from "react";
-import SuckIt from "./suckit";
-import Movement from "./Movement";
-import NewGrid from "./maps/grids/NewGridTest";
-import Level1 from "./All-Maps/Level1";
-import Level2 from "./All-Maps/Level2";
-import Level3 from "./All-Maps/Level3";
-import Level4 from "./All-Maps/Level4";
-import LevelBillySux from "./All-Maps/LevelBillySux";
+import { useState, useEffect } from "react";
+import World1Component from "./World1";
+import World2Component from "./World2";
+import { levels } from "../levels";
 
 export default function GridTest() {
-  const initialGrid = [];
-  const [grid, setGrid] = useState(initialGrid);
+  const [grid, setGrid] = useState(levels[0].grid);
   const [p1Pos, setP1Pos] = useState({ row: 0, col: 0 });
-  const [currentLevel, setCurrentLevel] = useState(1);
+  const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
+  const [score, setscore] = useState(0);
+  const [inventory, setInventory] = useState([]);
+
+  let World1 = true;
+  let World2 = false;
+  const currentLevel = levels[currentLevelIndex];
+
+  const nextLevel = () => {
+    setInventory([]);
+    if (currentLevelIndex < 9) {
+      const newLevel = currentLevelIndex + 1;
+      setCurrentLevelIndex(newLevel);
+      setGrid(levels[newLevel].grid);
+      setP1Pos({ row: 0, col: 0 });
+    } else {
+      console.log("YOU WIN!!!");
+    }
+  };
+
+  if (currentLevelIndex >= 5) {
+    World1 = false;
+    World2 = true;
+  }
 
   const handleKeyPress = (e) => {
-    const nextLevel = () => {
-      if (currentLevel < 4) {
-        setCurrentLevel(currentLevel + 1);
-        setP1Pos({ row: 0, col: 0 });
-      } else {
-        console.log("YOU WIN!!!");
-      }
-    };
     let { row, col } = p1Pos;
     let newRow = row,
       newCol = col;
@@ -43,19 +52,22 @@ export default function GridTest() {
     if (e.key === "d") {
       newCol = Math.min(grid[0].length - 1, col + 1);
     }
+    const newCell = grid[newRow][newCol];
     if (
-      (grid[newRow][newCol] !== "B") &
-      (grid[newRow][newCol] !== "H") &
-      (grid[newRow][newCol] !== "V") &
-      (grid[newRow][newCol] !== "1") &
-      (grid[newRow][newCol] !== "2") &
-      (grid[newRow][newCol] !== "3") &
-      (grid[newRow][newCol] !== "4") &
-      (grid[newRow][newCol] !== "5") &
-      (grid[newRow][newCol] !== "6") &
-      (grid[newRow][newCol] !== "7") &
-      (grid[newRow][newCol] !== "8") &
-      (grid[newRow][newCol] !== "9")
+      (newCell !== "B") &
+        (newCell !== "H") &
+        (newCell !== "L") &
+        (newCell !== "V") &
+        (newCell !== "1") &
+        (newCell !== "2") &
+        (newCell !== "3") &
+        (newCell !== "4") &
+        (newCell !== "5") &
+        (newCell !== "6") &
+        (newCell !== "7") &
+        (newCell !== "8") &
+        (newCell !== "9") ||
+      (newCell === "L" && inventory.includes("key"))
     ) {
       const updatedGrid = grid.map((row, rowIndex) =>
         row.map((cell, colIndex) => {
@@ -64,7 +76,27 @@ export default function GridTest() {
           return cell;
         })
       );
+      if (newCell === "C") {
+        setscore(score + 1);
+      }
+      if (newCell === "K") {
+        setInventory((prevInventory) => [...prevInventory, "key"]);
+      }
+      if (newCell === "L" && inventory.includes("key")) {
+        setInventory((prevInventory) => {
+          let i = prevInventory.indexOf("key");
+          if (i > -1) {
+            return [
+              ...prevInventory.slice(0, i),
+              ...prevInventory.slice(i + 1),
+            ];
+          }
+          return prevInventory;
+        });
+      }
+
       setGrid(updatedGrid);
+
       setP1Pos({ row: newRow, col: newCol });
       if (grid[newRow][newCol] === "E") {
         nextLevel();
@@ -72,66 +104,26 @@ export default function GridTest() {
     }
   };
 
-  const exit = "/images/stairs_down.png";
-  const tileEnd = "/images/tile-end.png";
-  const tileCorner = "/images/tile-Corner.png";
-  const tileHallway = "/images/tile-hallway.png";
+  useEffect(() => {
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [p1Pos, grid]);
 
   return (
-    <div>
-      {currentLevel === 1 && (
-        <Level1
-          grid={grid}
-          setGrid={setGrid}
-          p1Pos={p1Pos}
-          setP1Pos={setP1Pos}
-          handleKeyPress={handleKeyPress}
-          exit={exit}
-          tileEnd={tileEnd}
-          tileCorner={tileCorner}
-          tileHallway={tileHallway}
-        />
-      )}
-      {currentLevel === 2 && (
-        <Level2
-          grid={grid}
-          setGrid={setGrid}
-          p1Pos={p1Pos}
-          setP1Pos={setP1Pos}
-          handleKeyPress={handleKeyPress}
-          exit={exit}
-          tileEnd={tileEnd}
-          tileCorner={tileCorner}
-          tileHallway={tileHallway}
-        />
-      )}
-      {currentLevel === 3 && (
-        <Level3
-          grid={grid}
-          setGrid={setGrid}
-          p1Pos={p1Pos}
-          setP1Pos={setP1Pos}
-          handleKeyPress={handleKeyPress}
-          exit={exit}
-          tileEnd={tileEnd}
-          tileCorner={tileCorner}
-          tileHallway={tileHallway}
-        />
-      )}
-      {currentLevel === 4 && (
-        <Level4
-          grid={grid}
-          setGrid={setGrid}
-          p1Pos={p1Pos}
-          setP1Pos={setP1Pos}
-          handleKeyPress={handleKeyPress}
-          exit={exit}
-          tileEnd={tileEnd}
-          tileCorner={tileCorner}
-          tileHallway={tileHallway}
-        />
-      )}
-    </div>
+    <>
+      <div className="level-grid-container">
+        <h1 style={{ color: "white" }}>Level: {currentLevel.name}</h1>
+        {World1 && (
+          <World1Component
+            grid={grid}
+            // billySux={!!currentLevel?.billySux}
+          />
+        )}
+        ;{World2 && <World2Component grid={grid} />}
+        {World2 && <p className="inventory">Inventory: {inventory} </p>}
+        {score > 0 && <div className="score">Score: {score}</div>}
+      </div>
+    </>
   );
 }
 
