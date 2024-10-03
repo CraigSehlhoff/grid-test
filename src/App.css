@@ -3,6 +3,35 @@ body {
   margin: 0;
 }
 
+@keyframes rotateAndScaleCoin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.2);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+@keyframes rotateAndScaleKey {
+  0% {
+    transform: rotate(0deg) scale(0.7);
+  }
+  25% {
+    transform: rotate(-25deg) scale(0.9);
+  }
+  50% {
+    transform: rotate(0deg) scale(1.1);
+  }
+  75% {
+    transform: rotate(25deg) scale(0.9);
+  }
+  100% {
+    transform: rotate(0deg) scale(0.7);
+  }
+}
+
 .level-grid-container {
   display: flex;
   flex-direction: column;
@@ -31,7 +60,7 @@ body {
 }
 
 .score {
-  color: white;
+  color: pink;
   font-size: 1.5rem;
   font-weight: bold;
 }
@@ -60,6 +89,12 @@ body {
   rotate: 270deg;
 }
 
+.coin {
+  width: 50%;
+  height: 50%;
+  animation: rotateAndScaleCoin 4s infinite ease-in-out;
+}
+
 /* world specific styling */
 .world {
   display: flex;
@@ -78,7 +113,7 @@ body {
 }
 
 .one-C {
-  background-color: gold;
+  background-color: green;
 }
 
 .player-picture {
@@ -98,7 +133,7 @@ body {
 }
 
 .two-C {
-  background-color: gold;
+  background-color: aqua;
 }
 
 .two-P {
@@ -117,4 +152,10 @@ body {
 
 .key {
   background-color: aqua;
+  width: 60%;
+  animation: rotateAndScaleKey 20s infinite ease-in-out;
+}
+
+.three-0 {
+  background-color: lavender;
 }

@@ -3,3 +3,23 @@ export const TILE_END_ASSET = "/images/tile-end.png";
 export const TILE_CORNER_ASSET = "/images/tile-Corner.png";
 export const TILE_HALLWAY_ASSET = "/images/tile-hallway.png";
 export const TILE_KEY_ASSET = "/images/tile-Key.png";
+export const TILE_DOOR_LOCKED = "/images/tile_Locked.png";
+export const COIN = "/images/Coin.png";
+export const RED_BUTTON_UP = "/images/RedUp.png";
+export const RED_BUTTON_DOWN = "/images/RedDown.png";
+export const RED_BLOCK = "/images/RedBlock.png";
+
+export const BLOCKING_TILES = [
+  "B",
+  "H",
+  "V",
+  "1",
+  "2",
+  "3",
+  "4",
+  "5",
+  "6",
+  "7",
+  "8",
+  "9",
+];

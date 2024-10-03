@@ -1,11 +1,13 @@
+import { Toaster } from "sonner";
 import { useState } from "react";
-import GridTest from "./components/InitialLogic";
+import Game from "./components/Game";
 import "./App.css";
 
 function App() {
   return (
     <div>
-      <GridTest />
+      <Game />
+      <Toaster position="bottom-center" className="toaster" />
     </div>
   );
 }
