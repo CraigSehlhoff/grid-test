@@ -1,12 +1,13 @@
 import { Toaster } from "sonner";
-import { useState } from "react";
-import Game from "./components/Game";
+import React, { useState } from "react";
+// import Game from "./components/Game";
 import "./App.css";
+import TitleScreen from "./components/TitleScreen";
 
 function App() {
   return (
     <div>
-      <Game />
+      <TitleScreen />
       <Toaster position="bottom-center" className="toaster" />
     </div>
   );

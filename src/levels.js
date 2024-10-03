@@ -1,4 +1,9 @@
-import { world1Tiles, world2Tiles, world3Tiles } from "./components/Tiles";
+import {
+  world1Tiles,
+  world2Tiles,
+  world3Tiles,
+  world4Tiles,
+} from "./components/Tiles";
 
 export const levels = [
   {
@@ -150,6 +155,94 @@ export const levels = [
   {
     name: "3-2",
     tileSet: world3Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "3-3",
+    tileSet: world3Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "3-4",
+    tileSet: world3Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "3-5",
+    tileSet: world3Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "4-1",
+    tileSet: world4Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "4-2",
+    tileSet: world4Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "4-3",
+    tileSet: world4Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "4-4",
+    tileSet: world4Tiles,
+    grid: [
+      ["P", "V", "U", "0"],
+      ["0", "1", "6", "0"],
+      ["0", "0", "0", "0"],
+      ["0", "4", "H", "H"],
+      ["0", "B", "C", "E"],
+    ],
+  },
+  {
+    name: "4-💀",
+    tileSet: world4Tiles,
     grid: [
       ["P", "V", "U", "0"],
       ["0", "1", "6", "0"],

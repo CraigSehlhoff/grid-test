@@ -1,9 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import WorldComponent from "./WorldComponent";
 import { levels } from "../levels";
 import { Text } from "./Text";
 import { toast } from "sonner";
 import { BLOCKING_TILES } from "../constants";
+import Settings from "./Settings";
+
 // import { world1Levels } from "./Levels/World1";
 // import { world2Levels } from "./Levels/world2";
 
@@ -16,10 +18,27 @@ export default function Game() {
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
   const [grid, setGrid] = useState(levels[currentLevelIndex].grid);
   const [p1Pos, setP1Pos] = useState({ row: 0, col: 0 });
-
   const [score, setscore] = useState(0);
   const [inventory, setInventory] = useState([]);
   const [steps, setSteps] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
+  const [showSteps, setShowSteps] = useState(false);
+
+  const gameOverDialogRef = useRef(null);
+  const settingsDialogRef = useRef(null);
+
+  const openSettings = () => {
+    if (settingsDialogRef.current) {
+      settingsDialogRef.current.showModal();
+    }
+  };
+
+  const closeSettings = () => {
+    if (settingsDialogRef.current) {
+      settingsDialogRef.current.close();
+    }
+  };
 
   let World2 = false;
 
@@ -27,11 +46,15 @@ export default function Game() {
 
   const nextLevel = () => {
     setInventory([]);
-    if (currentLevelIndex < 11) {
-      const newLevel = currentLevelIndex + 1;
-      setCurrentLevelIndex(newLevel);
-      setGrid(levels[newLevel].grid);
-      setP1Pos({ row: 0, col: 0 });
+    if (currentLevelIndex < 19) {
+      setLoading(true);
+      setTimeout(() => {
+        const newLevel = currentLevelIndex + 1;
+        setCurrentLevelIndex(newLevel);
+        setGrid(levels[newLevel].grid);
+        setP1Pos({ row: 0, col: 0 });
+        setLoading(false);
+      }, 400);
     } else {
       console.log("YOU WIN!!!");
     }
@@ -112,35 +135,52 @@ export default function Game() {
     if (newCell === "K") {
       setInventory((prevInventory) => [...prevInventory, keyOne]);
     }
-    // if (newCell === "U") {
-    //   setGrid((prevGrid) =>
-    //     prevGrid.map((row, rowIndex) =>
-    //       row.map((cell, colIndex) => {
-    //         if (rowIndex === newRow && colIndex === newCol) return "D";
-    //         return cell === "B" ? "0" : cell;
-    //       })
-    //     )
-    //   );
-    // }
 
     setGrid(updatedGrid);
     setP1Pos({ row: newRow, col: newCol });
 
     if (grid[newRow][newCol] === "E") {
-      console.log("EXITING");
       nextLevel();
     }
   };
 
-  // step counter
+  // step counter and gameover
   useEffect(() => {
-    setSteps((prevSteps) => prevSteps + 1);
     console.log(steps);
+    setSteps((prevSteps) => {
+      const newStepCount = prevSteps + 1;
+      if (
+        (newStepCount >= 158 && currentLevelIndex <= 4) ||
+        (newStepCount >= 1000 &&
+          currentLevelIndex >= 5 &&
+          currentLevelIndex <= 9) ||
+        (newStepCount >= 1000 &&
+          currentLevelIndex >= 10 &&
+          currentLevelIndex <= 14) ||
+        (newStepCount >= 1000 &&
+          currentLevelIndex >= 15 &&
+          currentLevelIndex <= 19)
+      ) {
+        setGameOver(true);
+        setP1Pos({ row: 0, col: 0 });
+        setShowSteps(true);
+        setscore(0);
+        if (gameOverDialogRef.current) {
+          gameOverDialogRef.current.showModal();
+        }
+      }
+      return newStepCount;
+    });
   }, [p1Pos]);
 
   useEffect(() => {
     if (currentLevelIndex === 5 || currentLevelIndex === 10) setSteps(1);
   }, [currentLevelIndex]);
+
+  // useEffect(() =>
+  // if(showSteps) {
+  //   return
+  // })
 
   // all messages
   useEffect(() => {
@@ -178,23 +218,57 @@ export default function Game() {
   // console.log(text);
   return (
     <>
-      <div className="level-grid-container">
-        <h1 style={{ color: "white" }}>Level: {currentLevel.name}</h1>
-        <WorldComponent
-          tileSet={currentLevel.tileSet}
-          grid={grid}
-          // billySux={!!currentLevel?.billySux}
-        />
-        {World2 && (
-          <p className="inventory">
-            Inventory:{" "}
-            {inventory?.map((inv, index) => (
-              <img src={inv.image} key={(inv.id, index)} />
-            ))}
-          </p>
-        )}
-        {score > 0 && <div className="score">Score: {score}</div>}
-      </div>
+      {loading ? (
+        <div className="loading-screen">
+          <h1>Loading...</h1>
+        </div>
+      ) : (
+        <div className="level-grid-container">
+          <h1 style={{ color: "white" }}>Level: {currentLevel.name}</h1>
+          <WorldComponent
+            tileSet={currentLevel.tileSet}
+            grid={grid}
+            // billySux={!!currentLevel?.billySux}
+          />
+          {World2 && (
+            <p className="inventory">
+              Inventory:{" "}
+              {inventory?.map((inv, index) => (
+                <img src={inv.image} key={(inv.id, index)} />
+              ))}
+            </p>
+          )}
+          {score > 0 && <div className="score">Score: {score}</div>}
+          {showSteps && (
+            <div className="show-steps">Steps Remaining: {157 - steps}</div>
+          )}
+          {gameOver && ( // Game over modal
+            <dialog ref={gameOverDialogRef}>
+              <h2>Game Over</h2>
+              <p>
+                Oh...wait...did we forget to mention you have a set number of
+                steps per world?
+              </p>
+              <p>...because thats pretty important...</p>
+              <button
+                onClick={() => {
+                  setGameOver(false);
+                  setCurrentLevelIndex(0);
+                  setSteps(0);
+                  setInventory([]);
+                  setGrid(levels[0].grid);
+                }}
+              >
+                Try Again?
+              </button>
+            </dialog>
+          )}
+          <button onClick={openSettings}>Settings</button>
+          <dialog ref={settingsDialogRef}>
+            <Settings closeSettings={closeSettings} />
+          </dialog>
+        </div>
+      )}
     </>
   );
 }
@@ -211,10 +285,13 @@ export default function Game() {
 // -youre doing it man...keep it up and dont give up, please
 
 // all that up there is good and all but focus on this for right now...lets do these things first
-//start menu/screen
 //settings = sounds/music plus find some quick sound bites....like for coins and keys and doors and buttons...maybe stairs...maybe also do a timeout effect in between levels...just like a second or two with a loading screen just to keep it old school
 // get world 3 going and figure out switches...maybe work in a second one now that the first is working
 // TRY and think on world 4...both switches and buttons...good shit man
 // maybe do a max step per level but not say it right away...you already have the steps being logged to the console...now we have to make a fail state that sends you back to the start...maybe not the start of the game just the same world?  make the max steps world based NOT level based...that will give you a bit more play time on the game
 // UPDATE THOSE MESSAGES!!!
 // figure out how rune/dusk works too
+
+//BEFORE THAT STUFF FIX THE ISSUE WITH THE STEP COUNTER GOING CRAZY WHENEVER YOU GET A GAMEOVER
+// SO what we have to do next...make more levels...customize the different worlds...and then update the max steps for each and make sure the step counter changes to match the appropriate levels...OH and you also have to make a winning screen modal...
+//maybe also make the title screen into an actual modal instead of a whole component?
