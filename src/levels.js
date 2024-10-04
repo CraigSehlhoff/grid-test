@@ -5,10 +5,18 @@ import {
   world4Tiles,
 } from "./components/Tiles";
 
+export const stepsForWorlds = {
+  1: 158,
+  2: 1000,
+  3: 1000,
+  4: 1000,
+};
+
 export const levels = [
   {
     name: "1 - 1",
     tileSet: world1Tiles,
+    world: 1,
     grid: [
       ["P", "2", "E"],
       ["0", "0", "C"],
@@ -18,6 +26,7 @@ export const levels = [
   {
     name: "1 - 2",
     tileSet: world1Tiles,
+    world: 1,
     grid: [
       ["P", "0", "1", "3"],
       ["0", "0", "0", "0"],
@@ -28,6 +37,7 @@ export const levels = [
   {
     name: "1 - 3",
     tileSet: world1Tiles,
+    world: 1,
     grid: [
       ["P", "0", "1", "H", "H", "9"],
       ["0", "0", "0", "0", "0", "1"],
@@ -40,6 +50,7 @@ export const levels = [
   {
     name: "1 - 4",
     tileSet: world1Tiles,
+    world: 1,
     grid: [
       ["P", "0", "0", "0", "0", "V", "C", "0", "0", "0"],
       ["9", "0", "4", "9", "0", "V", "0", "0", "8", "0"],
@@ -54,7 +65,8 @@ export const levels = [
   },
   // {
   //   name: "Billy S
-  //   billySux: true,
+  //   billySRx: trRe,
+  // world: 1,
   //   grid: [
   //     ["P", "B", "0", "0", "0", "C"],
   //     ["0", "B", "0", "B", "B", "0"],
@@ -69,7 +81,8 @@ export const levels = [
   {
     name: "1 - 5",
     tileSet: world1Tiles,
-    billySux: false,
+    billySRx: false,
+    world: 1,
     grid: [
       ["P", "V", "E", "0", "0", "0", "0", "0", "0", "1"],
       ["0", "V", "4", "H", "H", "H", "H", "6", "0", "0"],
@@ -85,6 +98,7 @@ export const levels = [
   {
     name: "2 - 1",
     tileSet: world2Tiles,
+    world: 2,
     grid: [
       ["P", "0", "0", "1"],
       ["0", "0", "K", "0"],
@@ -95,6 +109,7 @@ export const levels = [
   {
     name: "2 - 2",
     tileSet: world2Tiles,
+    world: 2,
     grid: [
       ["P", "0", "0", "0"],
       ["0", "7", "9", "L"],
@@ -106,6 +121,7 @@ export const levels = [
   {
     name: "2 - 3",
     tileSet: world2Tiles,
+    world: 2,
     grid: [
       ["P", "0", "0", "0", "0", "0", "0"],
       ["0", "0", "0", "0", "0", "0", "0"],
@@ -119,6 +135,7 @@ export const levels = [
   {
     name: "2 - 4",
     tileSet: world2Tiles,
+    world: 2,
     grid: [
       ["P", "1", "9", "0", "V", "K", "E"],
       ["0", "7", "3", "0", "V", "0", "4"],
@@ -134,6 +151,7 @@ export const levels = [
   {
     name: "2 - 5",
     tileSet: world2Tiles,
+    world: 2,
     grid: [
       ["P", "0", "0", "0"],
       ["0", "0", "0", "0"],
@@ -144,8 +162,9 @@ export const levels = [
   {
     name: "3-1",
     tileSet: world3Tiles,
+    world: 3,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -155,19 +174,21 @@ export const levels = [
   {
     name: "3-2",
     tileSet: world3Tiles,
+    world: 3,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "Y", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
-      ["0", "B", "C", "E"],
+      ["0", "U", "C", "E"],
     ],
   },
   {
     name: "3-3",
     tileSet: world3Tiles,
+    world: 3,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -177,8 +198,9 @@ export const levels = [
   {
     name: "3-4",
     tileSet: world3Tiles,
+    world: 3,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -188,8 +210,9 @@ export const levels = [
   {
     name: "3-5",
     tileSet: world3Tiles,
+    world: 3,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -199,8 +222,9 @@ export const levels = [
   {
     name: "4-1",
     tileSet: world4Tiles,
+    world: 4,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -210,8 +234,9 @@ export const levels = [
   {
     name: "4-2",
     tileSet: world4Tiles,
+    world: 4,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -221,8 +246,9 @@ export const levels = [
   {
     name: "4-3",
     tileSet: world4Tiles,
+    world: 4,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -232,8 +258,9 @@ export const levels = [
   {
     name: "4-4",
     tileSet: world4Tiles,
+    world: 4,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],
@@ -243,8 +270,9 @@ export const levels = [
   {
     name: "4-💀",
     tileSet: world4Tiles,
+    world: 4,
     grid: [
-      ["P", "V", "U", "0"],
+      ["P", "V", "R", "0"],
       ["0", "1", "6", "0"],
       ["0", "0", "0", "0"],
       ["0", "4", "H", "H"],

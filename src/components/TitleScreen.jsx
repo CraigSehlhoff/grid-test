@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Game from "./Game";
-import Settings from "./Settings";
+import { SettingsModal } from "./SettingsModal";
 
 export default function TitleScreen() {
   const [gameStarted, setGameStarted] = useState(false);
@@ -11,15 +11,11 @@ export default function TitleScreen() {
   };
 
   const openSettings = () => {
-    if (settingsDialogRef.current) {
-      settingsDialogRef.current.showModal();
-    }
+    settingsDialogRef?.current?.showModal();
   };
 
   const closeSettings = () => {
-    if (settingsDialogRef.current) {
-      settingsDialogRef.current.close();
-    }
+    settingsDialogRef?.current?.close();
   };
 
   return gameStarted ? (
@@ -33,9 +29,7 @@ export default function TitleScreen() {
       <button onClick={openSettings} className="title-screen-settings">
         Settings
       </button>
-      <dialog ref={settingsDialogRef}>
-        <Settings closeSettings={closeSettings} />
-      </dialog>
+      <SettingsModal closeSettings={closeSettings} ref={settingsDialogRef} />
     </div>
   );
 }
