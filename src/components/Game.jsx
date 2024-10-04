@@ -65,6 +65,7 @@ export default function Game() {
   }
 
   const handleKeyPress = (e) => {
+    if (gameOver) return;
     let { row, col } = p1Pos;
     let newRow = row,
       newCol = col;
@@ -147,6 +148,12 @@ export default function Game() {
   // step counter and gameover
   useEffect(() => {
     console.log(steps);
+    if (gameOver) {
+      if (gameOverDialogRef.current) {
+        gameOverDialogRef.current.showModal();
+      }
+      return;
+    }
     setSteps((prevSteps) => {
       const newStepCount = prevSteps + 1;
       if (
@@ -165,13 +172,10 @@ export default function Game() {
         setP1Pos({ row: 0, col: 0 });
         setShowSteps(true);
         setscore(0);
-        if (gameOverDialogRef.current) {
-          gameOverDialogRef.current.showModal();
-        }
       }
       return newStepCount;
     });
-  }, [p1Pos]);
+  }, [p1Pos, gameOver]);
 
   useEffect(() => {
     if (currentLevelIndex === 5 || currentLevelIndex === 10) setSteps(1);
@@ -242,7 +246,7 @@ export default function Game() {
           {showSteps && (
             <div className="show-steps">Steps Remaining: {157 - steps}</div>
           )}
-          {gameOver && ( // Game over modal
+          {gameOver && (
             <dialog ref={gameOverDialogRef}>
               <h2>Game Over</h2>
               <p>
@@ -292,6 +296,5 @@ export default function Game() {
 // UPDATE THOSE MESSAGES!!!
 // figure out how rune/dusk works too
 
-//BEFORE THAT STUFF FIX THE ISSUE WITH THE STEP COUNTER GOING CRAZY WHENEVER YOU GET A GAMEOVER
 // SO what we have to do next...make more levels...customize the different worlds...and then update the max steps for each and make sure the step counter changes to match the appropriate levels...OH and you also have to make a winning screen modal...
 //maybe also make the title screen into an actual modal instead of a whole component?
