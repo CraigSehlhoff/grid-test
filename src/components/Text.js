@@ -15,7 +15,10 @@ export const Text = {
     initial: "Welcome! You can move with WASD.  Try to get to the stairs.",
     World2: "OH WOW IS THAT A KEY AND A LOCKED DOOR?",
     World24: "Ah...do you go back for the coins or just leave?",
+    World25: "...Careful now...",
     World3: "No shot that's a button...I wonder what it does?",
+    World4: "Oh look...your inventory is back!",
+    World45: "I think this is it! Oh...I hope you have enough steps left...",
   },
   noText: {
     space: " ",

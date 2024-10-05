@@ -33,7 +33,34 @@ body {
 }
 
 .title-screen-main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   color: yellow;
+  height: 700px;
+  width: 500px;
+  margin: auto;
+  margin-top: 10px;
+  border: 1px whitesmoke solid;
+  border-radius: 30px;
+}
+
+.title-screen-title {
+  margin-top: 150px;
+  margin-bottom: 100px;
+}
+
+.title-screen-new-game {
+  height: 45px;
+  width: 120px;
+  border-radius: 60px;
+  margin-bottom: 20px;
+}
+
+.title-screen-settings {
+  height: 45px;
+  width: 120px;
+  border-radius: 60px;
 }
 
 dialog {
@@ -153,11 +180,9 @@ dialog {
   background-color: gray;
 }
 
-.two-0 {
-  background-color: aqua;
-}
-
-.two-C {
+.two-0,
+.two-C,
+.two-k {
   background-color: aqua;
 }
 
@@ -169,18 +194,28 @@ dialog {
   color: white;
 }
 
-.two-key {
-  background-color: aqua;
-  width: 100%;
+.key {
+  animation: rotateAndScaleKey 20s infinite ease-in-out;
+  /* background-color: aqua; */
+}
+
+.three-0,
+.three-C,
+.three {
+  background-color: lavender;
+}
+
+.block {
   height: 100%;
 }
 
-.key {
-  background-color: aqua;
-  width: 60%;
-  animation: rotateAndScaleKey 20s infinite ease-in-out;
+.four-0,
+.four-C,
+.four-k {
+  background-color: burlywood;
 }
 
-.three-0 {
-  background-color: lavender;
+.poop {
+  width: 100%;
+  background-color: burlywood;
 }

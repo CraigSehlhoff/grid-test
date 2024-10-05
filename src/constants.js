@@ -10,6 +10,7 @@ export const RED_BUTTON = "/images/RedUp.png";
 export const RED_BLOCK = "/images/RedBlock.png";
 export const BLUE_BUTTON = "/images/BlueUp.png";
 export const BLUE_BLOCK = "/images/BlueBlock.png";
+export const POOP = "/images/Poop.png";
 
 export const BLOCKING_TILES = [
   "B",

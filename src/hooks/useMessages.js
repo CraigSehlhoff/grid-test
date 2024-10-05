@@ -27,8 +27,11 @@ export function useMessages({ score, currentLevelIndex }) {
 
   useEffect(() => {
     if (currentLevelIndex === 0) toast(Text.world.initial);
-    if (currentLevelIndex === 5) toast(Text.world.World2);
-    if (currentLevelIndex === 8) toast(Text.world.World24);
-    if (currentLevelIndex === 10) toast(Text.world.World3);
+    if (currentLevelIndex === 5) toast.info(Text.world.World2);
+    if (currentLevelIndex === 8) toast.info(Text.world.World24);
+    if (currentLevelIndex === 9) toast.warning(Text.world.World25);
+    if (currentLevelIndex === 10) toast.info(Text.world.World3);
+    if (currentLevelIndex === 15) toast(Text.world.World4);
+    if (currentLevelIndex === 19) toast(Text.world.World45);
   }, [currentLevelIndex]);
 }

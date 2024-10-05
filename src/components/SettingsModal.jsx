@@ -1,7 +1,6 @@
 import React from "react";
 
 export const SettingsModal = React.forwardRef(({ closeSettings }, ref) => {
-  console.log("🪵 | SettingsModal | ref:", ref);
   return (
     <dialog ref={ref}>
       <div className="settings-main-container">

@@ -1,0 +1,20 @@
+  B - red-block
+  C - coin
+  E - exit/stairs
+  H - horizontal wall
+  K - key
+  L - locked door
+  P - player...right now always at 0,0
+  R - red button
+  U - blue block
+  V - vertical wall
+  Y - blue button
+  0 - blank space
+  1 - corner wall |_
+  2 - end wall |_|
+  3 - corner wall _|
+  4 - end wall |=
+  6 - end wall =|
+  7 - corner wall |-
+  8 - end wall |-|
+  9 - corner wall -|

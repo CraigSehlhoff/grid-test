@@ -16,14 +16,18 @@ export default function Game() {
   const [grid, setGrid] = useState(levels[currentLevelIndex].grid);
   const [p1Pos, setP1Pos] = useState({ row: 0, col: 0 });
   const [score, setScore] = useState(0);
+  const [startingScore, setStartingScore] = useState(0);
   const [inventory, setInventory] = useState([]);
   const [steps, setSteps] = useState(0);
   const [loading, setLoading] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [showSteps, setShowSteps] = useState(false);
+  const [winState, setWinState] = useState(false);
+  const [poop, setPoop] = useState(false);
 
   const gameOverDialogRef = useRef(null);
   const settingsDialogRef = useRef(null);
+  const winStateDialogRef = useRef(null);
 
   const openSettings = () => {
     settingsDialogRef?.current?.showModal();
@@ -33,7 +37,9 @@ export default function Game() {
     settingsDialogRef?.current?.close();
   };
 
-  let World2 = currentLevelIndex >= 5;
+  let showInventory =
+    (currentLevelIndex >= 5 && currentLevelIndex <= 9) ||
+    currentLevelIndex >= 15;
 
   const currentLevel = levels[currentLevelIndex];
   const currentWorldSteps = stepsForWorlds[currentLevel.world];
@@ -43,9 +49,9 @@ export default function Game() {
       setGameOver(true);
       setP1Pos({ row: 0, col: 0 });
       setShowSteps(true);
-      setScore(0);
+      setScore(startingScore);
     }
-  }, [currentLevel.world, steps]);
+  }, [currentLevel.world, steps, startingScore]);
 
   const nextLevel = () => {
     setInventory([]);
@@ -65,15 +71,54 @@ export default function Game() {
 
   // step counter and gameover
   useEffect(() => {
-    console.log(steps);
     if (gameOver) {
       if (gameOverDialogRef.current) {
         gameOverDialogRef.current.showModal();
       }
       return;
     }
-  }, [p1Pos, gameOver]);
+  }, [gameOver]);
 
+  const worldStartLevels = {
+    1: 0,
+    2: 5,
+    3: 10,
+    4: 15,
+  };
+
+  useEffect(() => {
+    const currentWorldStartLevel = worldStartLevels[currentLevel.world];
+    if (currentLevelIndex === currentWorldStartLevel) {
+      setStartingScore(score);
+    }
+  }, [currentLevelIndex, currentLevel.world]);
+
+  useEffect(() => {
+    if (
+      currentLevelIndex === 5 ||
+      currentLevelIndex === 10 ||
+      currentLevelIndex === 15
+    )
+      setSteps(0);
+  }, [currentLevelIndex]);
+
+  const finalExitPos = { row: 0, col: 2 };
+  //win state
+  useEffect(() => {
+    if (
+      currentLevelIndex === 19 &&
+      p1Pos.row === finalExitPos.row &&
+      p1Pos.col === finalExitPos.col
+    ) {
+      setWinState(true);
+      winStateDialogRef.current.showModal();
+      if (winStateDialogRef.current) {
+        return;
+      }
+    }
+  }, [p1Pos.row, p1Pos.col, currentLevelIndex]);
+
+  //hook for all movement
   useMovement({
     playerPos: p1Pos,
     setPlayerPos: setP1Pos,
@@ -86,10 +131,7 @@ export default function Game() {
     setSteps,
   });
 
-  useEffect(() => {
-    if (currentLevelIndex === 5 || currentLevelIndex === 10) setSteps(1);
-  }, [currentLevelIndex]);
-
+  //hook for text to be displayed
   useMessages({
     score,
     currentLevelIndex,
@@ -99,17 +141,13 @@ export default function Game() {
     <>
       {loading ? (
         <div className="loading-screen">
-          <h1>Loading...</h1>
+          <h1>Loading next level...</h1>
         </div>
       ) : (
         <div className="level-grid-container">
           <h1 style={{ color: "white" }}>Level: {currentLevel.name}</h1>
-          <WorldComponent
-            tileSet={currentLevel.tileSet}
-            grid={grid}
-            // billySux={!!currentLevel?.billySux}
-          />
-          {World2 && (
+          <WorldComponent tileSet={currentLevel.tileSet} grid={grid} />
+          {showInventory && (
             <p className="inventory">
               Inventory:{" "}
               {inventory?.map((inv, index) => (
@@ -119,29 +157,70 @@ export default function Game() {
           )}
           {score > 0 && <div className="score">Score: {score}</div>}
           {showSteps && (
-            <div className="show-steps">Steps Remaining: {157 - steps}</div>
+            <div className="show-steps">
+              Steps Remaining: {currentWorldSteps - steps}
+            </div>
           )}
-          {gameOver && (
-            <dialog ref={gameOverDialogRef}>
-              <h2>Game Over</h2>
-              <p>
-                Oh...wait...did we forget to mention you have a set number of
-                steps per world?
-              </p>
-              <p>...because thats pretty important...</p>
+
+          <dialog ref={gameOverDialogRef}>
+            <h2>Game Over</h2>
+            <p>
+              Oh...wait...did we forget to mention you have a set number of
+              steps per world?
+            </p>
+            <p>...because thats pretty important...</p>
+            <button
+              onClick={() => {
+                const currentWorldStartLevel =
+                  worldStartLevels[currentLevel.world];
+                setGameOver(false);
+                setCurrentLevelIndex(currentWorldStartLevel);
+                setSteps(0);
+                setInventory([]);
+                setGrid(levels[currentWorldStartLevel].grid);
+                setScore(startingScore);
+                gameOverDialogRef.current.close();
+              }}
+            >
+              Restart World?
+            </button>
+          </dialog>
+
+          <dialog ref={winStateDialogRef}>
+            <h1>CONGRATULATIONS!!!</h1>
+            <p>You collected: {score} coins out of 87!</p>
+            {score === 81 && <h3>You unlocked a new skin!!!</h3>}
+            {score === 81 ? (
               <button
                 onClick={() => {
-                  setGameOver(false);
                   setCurrentLevelIndex(0);
+                  setGrid(levels[0].grid);
+                  setP1Pos({ row: 0, col: 0 });
+                  setScore(0);
                   setSteps(0);
                   setInventory([]);
-                  setGrid(levels[0].grid);
+                  setPoop(true);
+                  winStateDialogRef.current.close();
                 }}
               >
-                Try Again?
+                You've Earned this!!!
               </button>
-            </dialog>
-          )}
+            ) : (
+              <button
+                onClick={() => {
+                  setCurrentLevelIndex(0);
+                  setGrid(levels[0].grid);
+                  setP1Pos({ row: 0, col: 0 });
+                  setScore(0);
+                  setSteps(0);
+                  setInventory([]);
+                  winStateDialogRef.current.close();
+                }}
+              >
+                Play again?
+              </button>
+            )}
+          </dialog>
           <button onClick={openSettings}>Settings</button>
           <SettingsModal
             closeSettings={closeSettings}
@@ -155,13 +234,15 @@ export default function Game() {
 
 //well...here we are...home stretch kinda lets just map out what else has to be done...
 //essential things
-//-finish making the maps...the 3's with buttons and the 4s with both
-//-step counts for each world
-//-winning screen
+//figure out POOP-skin
+//music/sound effects
 //-messages everywhere
 //-styling! (this wont be as bad as you think)
+//actual sprite for the character?
 //-figure out rune/dusk
 //-figure out MOBILE!!!
+
+//THERE IS AN ISSUE WITH A GAME OVER IF WE DO IT BY WORLD...SOMEHOW WE HAVE TO KEEP THE SCORE FROM EARLIER OR ELSE IT WONT BE FAIR
 
 //optional
 //-character select...or atleast some reward for getting all coins (or most?)
