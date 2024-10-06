@@ -5,13 +5,18 @@ import { Text } from "./Text";
 import { toast } from "sonner";
 import { useMovement } from "../hooks/useMovement";
 import { useMessages } from "../hooks/useMessages";
-
+import { useSounds } from "../hooks/useSounds";
 import { SettingsModal } from "./SettingsModal";
 
 // import { world1Levels } from "./Levels/World1";
 // import { world2Levels } from "./Levels/world2";
 
-export default function Game() {
+export default function Game({
+  showMessages,
+  setShowMessages,
+  soundEffects,
+  setSoundEffects,
+}) {
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
   const [grid, setGrid] = useState(levels[currentLevelIndex].grid);
   const [p1Pos, setP1Pos] = useState({ row: 0, col: 0 });
@@ -28,6 +33,13 @@ export default function Game() {
   const gameOverDialogRef = useRef(null);
   const settingsDialogRef = useRef(null);
   const winStateDialogRef = useRef(null);
+  const {
+    playCoinSound,
+    playKeySound,
+    playLevelCompleteSound,
+    playStepSound,
+    playUnlockDoorSound,
+  } = useSounds(soundEffects);
 
   const openSettings = () => {
     settingsDialogRef?.current?.showModal();
@@ -129,12 +141,18 @@ export default function Game() {
     setScore,
     nextLevel,
     setSteps,
+    playCoinSound,
+    playKeySound,
+    playUnlockDoorSound,
+    playStepSound,
+    playLevelCompleteSound,
   });
 
   //hook for text to be displayed
   useMessages({
     score,
     currentLevelIndex,
+    showMessages,
   });
 
   return (
@@ -146,7 +164,14 @@ export default function Game() {
       ) : (
         <div className="level-grid-container">
           <h1 style={{ color: "white" }}>Level: {currentLevel.name}</h1>
-          <WorldComponent tileSet={currentLevel.tileSet} grid={grid} />
+          <button className="game-settings-button" onClick={openSettings}>
+            Settings
+          </button>
+          <WorldComponent
+            tileSet={currentLevel.tileSet}
+            grid={grid}
+            poop={poop}
+          />
           {showInventory && (
             <p className="inventory">
               Inventory:{" "}
@@ -162,69 +187,85 @@ export default function Game() {
             </div>
           )}
 
-          <dialog ref={gameOverDialogRef}>
-            <h2>Game Over</h2>
-            <p>
-              Oh...wait...did we forget to mention you have a set number of
-              steps per world?
-            </p>
-            <p>...because thats pretty important...</p>
-            <button
-              onClick={() => {
-                const currentWorldStartLevel =
-                  worldStartLevels[currentLevel.world];
-                setGameOver(false);
-                setCurrentLevelIndex(currentWorldStartLevel);
-                setSteps(0);
-                setInventory([]);
-                setGrid(levels[currentWorldStartLevel].grid);
-                setScore(startingScore);
-                gameOverDialogRef.current.close();
-              }}
-            >
-              Restart World?
-            </button>
+          <dialog ref={gameOverDialogRef} className="gameover-dialog">
+            <div className="gameover-container">
+              <h2 className="gameover-title">Game Over</h2>
+              <p>
+                Oh...wait...did I forget to mention that you have a set number
+                of steps per world?
+              </p>
+              <p>...because thats pretty important...</p>
+              <button
+                className="gameover-button"
+                onClick={() => {
+                  const currentWorldStartLevel =
+                    worldStartLevels[currentLevel.world];
+                  setGameOver(false);
+                  setCurrentLevelIndex(currentWorldStartLevel);
+                  setSteps(0);
+                  setInventory([]);
+                  setGrid(levels[currentWorldStartLevel].grid);
+                  setScore(startingScore);
+                  gameOverDialogRef.current.close();
+                }}
+              >
+                Restart World?
+              </button>
+            </div>
           </dialog>
 
-          <dialog ref={winStateDialogRef}>
-            <h1>CONGRATULATIONS!!!</h1>
-            <p>You collected: {score} coins out of 87!</p>
-            {score === 81 && <h3>You unlocked a new skin!!!</h3>}
-            {score === 81 ? (
-              <button
-                onClick={() => {
-                  setCurrentLevelIndex(0);
-                  setGrid(levels[0].grid);
-                  setP1Pos({ row: 0, col: 0 });
-                  setScore(0);
-                  setSteps(0);
-                  setInventory([]);
-                  setPoop(true);
-                  winStateDialogRef.current.close();
-                }}
-              >
-                You've Earned this!!!
-              </button>
-            ) : (
-              <button
-                onClick={() => {
-                  setCurrentLevelIndex(0);
-                  setGrid(levels[0].grid);
-                  setP1Pos({ row: 0, col: 0 });
-                  setScore(0);
-                  setSteps(0);
-                  setInventory([]);
-                  winStateDialogRef.current.close();
-                }}
-              >
-                Play again?
-              </button>
-            )}
+          <dialog
+            ref={winStateDialogRef}
+            className="winning-dialog-main"
+            onClose={() => setWinState(false)}
+          >
+            <div>
+              <h1 className="winning-win">YOU WIN!!!</h1>
+              <h2 className="winning-congrats">CONGRATULATIONS!!!</h2>
+              <p>You collected: {score} out of 81 coins!</p>
+              {score === 81 && <h3>You unlocked a new skin!!!</h3>}
+              {score === 81 ? (
+                <button
+                  className="winning-button"
+                  onClick={() => {
+                    setCurrentLevelIndex(0);
+                    setGrid(levels[0].grid);
+                    setP1Pos({ row: 0, col: 0 });
+                    setScore(0);
+                    setSteps(0);
+                    setInventory([]);
+                    setPoop(true);
+                    winStateDialogRef.current.close();
+                  }}
+                >
+                  You've Earned this!!!
+                </button>
+              ) : (
+                <button
+                  className="winning-button"
+                  onClick={() => {
+                    setCurrentLevelIndex(0);
+                    setGrid(levels[0].grid);
+                    setP1Pos({ row: 0, col: 0 });
+                    setScore(0);
+                    setSteps(0);
+                    setInventory([]);
+                    winStateDialogRef.current.close();
+                  }}
+                >
+                  Play again?
+                </button>
+              )}
+            </div>
           </dialog>
-          <button onClick={openSettings}>Settings</button>
+
           <SettingsModal
             closeSettings={closeSettings}
             ref={settingsDialogRef}
+            showMessages={showMessages}
+            setShowMessages={setShowMessages}
+            soundEffects={soundEffects}
+            setSoundEffects={setSoundEffects}
           />
         </div>
       )}
@@ -234,20 +275,10 @@ export default function Game() {
 
 //well...here we are...home stretch kinda lets just map out what else has to be done...
 //essential things
-//figure out POOP-skin
-//music/sound effects
-//-messages everywhere
+//music has to be added per world...this could be easy?
+//also check the music vs sound effect volume levels...does it work?
 //-styling! (this wont be as bad as you think)
-//actual sprite for the character?
 //-figure out rune/dusk
 //-figure out MOBILE!!!
 
-//THERE IS AN ISSUE WITH A GAME OVER IF WE DO IT BY WORLD...SOMEHOW WE HAVE TO KEEP THE SCORE FROM EARLIER OR ELSE IT WONT BE FAIR
-
-//optional
-//-character select...or atleast some reward for getting all coins (or most?)
-//-other coin rewards
-//-setting for turning off the messages
-//-sounds/music (not optional?)
-
-//youve got this dude...look at how far this has come...shits crazy
+//youve got this dude...lets wrap this shit up today!!!

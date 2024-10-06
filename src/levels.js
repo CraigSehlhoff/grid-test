@@ -9,7 +9,7 @@ export const stepsForWorlds = {
   1: 158,
   2: 193,
   3: 206,
-  4: 319,
+  4: 301,
 };
 
 export const levels = [

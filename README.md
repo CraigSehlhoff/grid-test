@@ -1,8 +1,10 @@
-# React + Vite
+This is the Game!
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+this is my first attempt at making any kind of game! A day before starting this project was the first time I was able to get a box to move on the screen by pushing a button...10 days later I wrapped this up!
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Credits -
+(Title Music)
+Yay by Sakura Girl | https://soundcloud.com/sakuragirl_official
+Music promoted by https://www.chosic.com/free-music/all/
+Creative Commons CC BY 3.0
+https://creativecommons.org/licenses/by/3.0/

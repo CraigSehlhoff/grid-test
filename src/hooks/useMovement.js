@@ -22,6 +22,11 @@ export function useMovement({
   setScore,
   nextLevel,
   setSteps,
+  playCoinSound,
+  playKeySound,
+  playUnlockDoorSound,
+  playStepSound,
+  playLevelCompleteSound,
 }) {
   /*
    * Should check if the key thats being pressed is mapped to a specific direction,
@@ -34,15 +39,19 @@ export function useMovement({
 
     if (UP_KEYS.includes(e.key)) {
       newRow = Math.max(0, row - 1);
+      playStepSound();
     }
     if (LEFT_KEYS.includes(e.key)) {
       newCol = Math.max(0, col - 1);
+      playStepSound();
     }
     if (RIGHT_KEYS.includes(e.key)) {
       newCol = Math.min(grid[0].length - 1, col + 1);
+      playStepSound();
     }
     if (DOWN_KEYS.includes(e.key)) {
       newRow = Math.min(grid.length - 1, row + 1);
+      playStepSound();
     }
 
     const newCell = grid[newRow][newCol];
@@ -53,29 +62,19 @@ export function useMovement({
 
     //? If the cell locked
     if (newCell === "L") {
-      if (!inventory.find((i) => i.id === keyOne.id)) {
-        //? No proper key - return early and do nothing
+      const keyIndex = inventory.findIndex((i) => i.id === keyOne.id);
+      if (keyIndex === -1) {
         return;
       }
 
       //? use the key, remove one from inventory, continue with movement
       setInventory((prevInventory) => {
-        let i = prevInventory.findIndex((inv) => inv.id === keyOne.id);
-        if (i > -1) {
-          return [...prevInventory.slice(0, i), ...prevInventory.slice(i + 1)];
-        }
-        return prevInventory;
+        return [
+          ...prevInventory.slice(0, keyIndex),
+          ...prevInventory.slice(keyIndex + 1),
+        ];
       });
-    }
-
-    if (newCell === "L" && inventory.includes("key")) {
-      setInventory((prevInventory) => {
-        let i = prevInventory.indexOf("key");
-        if (i > -1) {
-          return [...prevInventory.slice(0, i), ...prevInventory.slice(i + 1)];
-        }
-        return prevInventory;
-      });
+      playUnlockDoorSound();
     }
     // collection and map replacement
     const updatedGrid = grid.map((row, rowIndex) =>
@@ -95,9 +94,12 @@ export function useMovement({
 
     if (newCell === "C") {
       setScore((prev) => prev + 1);
+      playCoinSound();
     }
+
     if (newCell === "K") {
       setInventory((prevInventory) => [...prevInventory, keyOne]);
+      playKeySound();
     }
 
     setGrid(updatedGrid);
@@ -109,6 +111,7 @@ export function useMovement({
 
     if (grid[newRow][newCol] === "E") {
       nextLevel();
+      playLevelCompleteSound();
     }
   };
 

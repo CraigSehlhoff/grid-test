@@ -2,8 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import Game from "./Game";
 import { SettingsModal } from "./SettingsModal";
 
-export default function TitleScreen() {
+export default function TitleScreen({ showMessages, setShowMessages }) {
   const [gameStarted, setGameStarted] = useState(false);
+  const [soundEffects, setSoundEffects] = useState(true);
   const settingsDialogRef = useRef(null);
 
   const newGame = () => {
@@ -19,7 +20,12 @@ export default function TitleScreen() {
   };
 
   return gameStarted ? (
-    <Game />
+    <Game
+      showMessages={showMessages}
+      setShowMessages={setShowMessages}
+      soundEffects={soundEffects}
+      setSoundEffects={setSoundEffects}
+    />
   ) : (
     <div className="title-screen-main-container">
       <h1 className="title-screen-title">THIS IS THE GAME!</h1>
@@ -29,7 +35,14 @@ export default function TitleScreen() {
       <button onClick={openSettings} className="title-screen-settings">
         Settings
       </button>
-      <SettingsModal closeSettings={closeSettings} ref={settingsDialogRef} />
+      <SettingsModal
+        closeSettings={closeSettings}
+        ref={settingsDialogRef}
+        showMessages={showMessages}
+        setShowMessages={setShowMessages}
+        soundEffects={soundEffects}
+        setSoundEffects={setSoundEffects}
+      />
     </div>
   );
 }

@@ -22,7 +22,14 @@ export const world1Tiles = {
   ),
   E: <img className="exit" src={EXIT_ASSET} />,
   H: <img className="horizontal wall" src={TILE_HALLWAY_ASSET} />,
-  P: <div className="world one-P">(o.0)</div>,
+  P: ({ poop }) =>
+    poop ? (
+      <div className="poop-state">
+        <img className="poop" src={POOP} />
+      </div>
+    ) : (
+      <div className="world one-P">(o.0)</div>
+    ),
   V: <img className="vertical wall" src={TILE_HALLWAY_ASSET} />,
   0: <div className="world one-0"> </div>,
   1: <img className="one-corner wall" src={TILE_CORNER_ASSET} />,
@@ -49,7 +56,14 @@ export const world2Tiles = {
     </div>
   ),
   L: <img className="world door-locked" src={TILE_DOOR_LOCKED} />,
-  P: <div className="world two-P">(0.o)</div>,
+  P: ({ poop }) =>
+    poop ? (
+      <div className="poop-state">
+        <img className="poop" src={POOP} />
+      </div>
+    ) : (
+      <div className="world two-P">(0.o)</div>
+    ),
   V: <img className="vertical wall" src={TILE_HALLWAY_ASSET} />,
   0: <div className="world two-0"></div>,
   1: <img className="one-corner wall" src={TILE_CORNER_ASSET} />,
@@ -77,11 +91,26 @@ export const world3Tiles = {
     </div>
   ),
   L: <img className="world door-locked" src={TILE_DOOR_LOCKED} />,
-  P: <div className="world three-P">(o.0)</div>,
-  R: <img className="button red" src={RED_BUTTON} />,
+  P: ({ poop }) =>
+    poop ? (
+      <div className="poop-state">
+        <img className="poop" src={POOP} />
+      </div>
+    ) : (
+      <div className="world three-P">(o.0)</div>
+    ),
+  R: (
+    <div className="world three">
+      <img className="button-three red" src={RED_BUTTON} />
+    </div>
+  ),
   U: <img className="blue block" src={BLUE_BLOCK} />,
   V: <img className="vertical wall" src={TILE_HALLWAY_ASSET} />,
-  Y: <img className="button blue" src={BLUE_BUTTON} />,
+  Y: (
+    <div className="world three">
+      <img className="button-three blue" src={BLUE_BUTTON} />
+    </div>
+  ),
   0: <div className="world three-0"></div>,
   1: <img className="one-corner wall" src={TILE_CORNER_ASSET} />,
   2: <img className="two-end wall" src={TILE_END_ASSET} />,
@@ -108,12 +137,27 @@ export const world4Tiles = {
     </div>
   ),
   L: <img className="world door-locked" src={TILE_DOOR_LOCKED} />,
-  P: <div className="world four-P">(0.o)</div>,
-  R: <img className="button red" src={RED_BUTTON} />,
+  P: ({ poop }) =>
+    poop ? (
+      <div className="poop-state">
+        <img className="poop" src={POOP} />
+      </div>
+    ) : (
+      <div className="world four-P">(0.o)</div>
+    ),
+  R: (
+    <div className="world four">
+      <img className="button-four red" src={RED_BUTTON} />
+    </div>
+  ),
   U: <img className="blue block" src={BLUE_BLOCK} />,
   V: <img className="vertical wall" src={TILE_HALLWAY_ASSET} />,
-  Y: <img className="button blue" src={BLUE_BUTTON} />,
-  0: <div className="world three-0"></div>,
+  Y: (
+    <div className="world four">
+      <img className="button-four blue" src={BLUE_BUTTON} />
+    </div>
+  ),
+  0: <div className="world four-0"></div>,
   1: <img className="one-corner wall" src={TILE_CORNER_ASSET} />,
   2: <img className="two-end wall" src={TILE_END_ASSET} />,
   3: <img className="three-corner wall" src={TILE_CORNER_ASSET} />,

@@ -5,9 +5,13 @@ import "./App.css";
 import TitleScreen from "./components/TitleScreen";
 
 function App() {
+  const [showMessages, setShowMessages] = useState(true);
   return (
     <div>
-      <TitleScreen />
+      <TitleScreen
+        showMessages={showMessages}
+        setShowMessages={setShowMessages}
+      />
       <Toaster position="bottom-center" className="toaster" />
     </div>
   );

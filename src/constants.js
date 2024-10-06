@@ -1,3 +1,4 @@
+//all 'art' assets
 export const EXIT_ASSET = "/images/stairs_down.png";
 export const TILE_END_ASSET = "/images/tile-end.png";
 export const TILE_CORNER_ASSET = "/images/tile-Corner.png";
@@ -11,6 +12,13 @@ export const RED_BLOCK = "/images/RedBlock.png";
 export const BLUE_BUTTON = "/images/BlueUp.png";
 export const BLUE_BLOCK = "/images/BlueBlock.png";
 export const POOP = "/images/Poop.png";
+
+//all sound assets
+export const COIN_SOUND = "/sounds/Coin.wav";
+export const KEY_SOUND = "/sounds/Key.wav";
+export const LEVELCOMPLETE_SOUND = "/sounds/LevelComplete.wav";
+export const STEP_SOUND = "/sounds/Step.wav";
+export const UNLOCKDOOR_SOUND = "/sounds/UnlockDoor.wav";
 
 export const BLOCKING_TILES = [
   "B",

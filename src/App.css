@@ -1,6 +1,7 @@
 body {
   background-color: black;
   margin: 0;
+  font-family: "Courier New", Courier, monospace;
 }
 
 @keyframes rotateAndScaleCoin {
@@ -63,6 +64,43 @@ body {
   border-radius: 60px;
 }
 
+.settings-dialog {
+  background-color: rgba(67, 89, 161, 0.951);
+}
+
+.settings-main-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  align-items: center;
+}
+
+.settings-title {
+  font-size: 2rem;
+  text-decoration: underline;
+  letter-spacing: 2px;
+}
+
+.settings-input-container {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+  gap: 10px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  letter-spacing: 0.8px;
+}
+
+.settings-button {
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  letter-spacing: 0.5px;
+  font-family: "Courier New", Courier, monospace;
+}
+
 dialog {
   color: wheat;
   width: 400px;
@@ -72,6 +110,40 @@ dialog {
   padding: 20px;
   background-color: green;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.gameover-dialog {
+  background-color: #352b42e4;
+}
+
+.gameover-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.gameover-title {
+  text-decoration: underline;
+  font-size: 35px;
+  margin-bottom: 15px;
+}
+
+.gameover-button {
+  border-radius: 5px;
+  letter-spacing: 0.8px;
+  height: 25px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.game-settings-button {
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 5px;
+  width: 100px;
+  height: 25px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-top: -15px;
+  background-color: rgba(255, 255, 255, 0.45);
 }
 
 .level-grid-container {
@@ -156,16 +228,14 @@ dialog {
   width: 100%;
 }
 
-.one-0 {
-  background-color: green;
+.one-0,
+.one-C {
+  background-color: #8ab060;
 }
 
 .one-P {
-  background-color: lightblue;
-}
-
-.one-C {
-  background-color: green;
+  background-color: #ede19e;
+  letter-spacing: -1.25px;
 }
 
 .player-picture {
@@ -183,11 +253,12 @@ dialog {
 .two-0,
 .two-C,
 .two-k {
-  background-color: aqua;
+  background-color: #e5ceb4;
 }
 
 .two-P {
-  background-color: orchid;
+  background-color: #d3a068;
+  letter-spacing: -1.25px;
 }
 
 .inventory {
@@ -201,8 +272,14 @@ dialog {
 
 .three-0,
 .three-C,
-.three {
+.three,
+.button-three {
   background-color: lavender;
+}
+
+.three-P {
+  background-color: rgb(216, 71, 173);
+  letter-spacing: -1.25px;
 }
 
 .block {
@@ -211,11 +288,53 @@ dialog {
 
 .four-0,
 .four-C,
-.four-k {
-  background-color: burlywood;
+.four-k,
+.button-four,
+.four {
+  background-color: #6a536e;
+}
+
+.four-P {
+  background-color: #352b42;
+  color: pink;
+  font-weight: bold;
+  letter-spacing: -1.25px;
 }
 
 .poop {
   width: 100%;
   background-color: burlywood;
+}
+
+.winning-dialog-main {
+  background-color: #cf8accf8;
+  color: #ede19e;
+  font-weight: bold;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
+.winning-win {
+  margin-top: 30px;
+  margin-bottom: -20px;
+}
+
+.winning-congrats {
+  margin-top: 50px;
+  margin-bottom: 35px;
+  text-decoration: underline;
+}
+
+.winning-button {
+  border-radius: 5px;
+  width: 120px;
+  height: 25px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-top: 30px;
+  font-family: "Courier New", Courier, monospace;
 }
