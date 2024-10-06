@@ -20,6 +20,13 @@ export const LEVELCOMPLETE_SOUND = "/sounds/LevelComplete.wav";
 export const STEP_SOUND = "/sounds/Step.wav";
 export const UNLOCKDOOR_SOUND = "/sounds/UnlockDoor.wav";
 
+//all music tracks
+export const TITLE_TRACK = "/music/Yay by Sakura Girl.mp3";
+export const WORLD_1_TRACK = "/music/Pixel Plains Retro Game Music.mp3";
+export const WORLD_2_TRACK = "/music/8-Bit Menu by David Renda.mp3";
+export const WORLD_3_TRACK = "/music/Retro Game Music 8-bit Air Fight.mp3";
+export const WORLD_4_TRACK = "public/music/Retro Game Music 8-bit Arcade.mp3";
+
 export const BLOCKING_TILES = [
   "B",
   "H",

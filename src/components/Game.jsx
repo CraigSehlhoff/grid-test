@@ -280,5 +280,7 @@ export default function Game({
 //-styling! (this wont be as bad as you think)
 //-figure out rune/dusk
 //-figure out MOBILE!!!
+//-UNDER 10 MB?!?!?!
+//WHATS WRONG WITH MY GIT???
 
 //youve got this dude...lets wrap this shit up today!!!
