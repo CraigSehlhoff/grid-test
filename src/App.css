@@ -46,8 +46,36 @@ body {
   border-radius: 30px;
 }
 
+.title-screen-dialog {
+  margin-top: 20px;
+  height: 600px;
+  width: 400px;
+  background-color: rgba(255, 255, 255, 0.833);
+  color: blue;
+}
+
+.title-screen-dialog-text {
+  margin-top: 200px;
+  margin-left: 80px;
+  font-weight: 800;
+  font-size: 1.3rem;
+  margin-bottom: 50px;
+}
+
+.title-screen-dialog-button {
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 5px;
+  width: 200px;
+  height: 50px;
+  margin-left: 95px;
+}
+
 .title-screen-title {
-  margin-top: 150px;
+  margin-top: 120px;
+  margin-bottom: 10px;
+}
+
+.title-screen-face {
   margin-bottom: 100px;
 }
 
@@ -64,6 +92,16 @@ body {
   width: 120px;
   border-radius: 60px;
   font-family: "Courier New", Courier, monospace;
+}
+
+.title-screen-subtitle {
+  margin-top: 75px;
+  font-weight: 200;
+  letter-spacing: -2px;
+}
+
+.name {
+  color: cyan;
 }
 
 .title-screen-music-button {
@@ -228,6 +266,7 @@ dialog {
   justify-content: center;
   align-items: center;
   color: green;
+  height: 400px;
 }
 
 /* world specific styling */

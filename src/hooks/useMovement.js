@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 
 import { BLOCKING_TILES } from "../constants";
+import { useSwipeControls } from "./useSwipeControls";
 
 const UP_KEYS = ["w", "ArrowUp"];
 const DOWN_KEYS = ["s", "ArrowDown"];
@@ -114,6 +115,10 @@ export function useMovement({
       playLevelCompleteSound();
     }
   };
+
+  let movePlayer = handleKeyPress;
+
+  useSwipeControls(movePlayer);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);
