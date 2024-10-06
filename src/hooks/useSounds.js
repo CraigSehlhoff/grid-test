@@ -6,6 +6,7 @@ import {
   LEVELCOMPLETE_SOUND,
   STEP_SOUND,
   UNLOCKDOOR_SOUND,
+  FART_SOUND,
 } from "../constants";
 
 export function useSounds(soundEffects) {
@@ -41,6 +42,12 @@ export function useSounds(soundEffects) {
     }
   };
 
+  const playFartSound = () => {
+    if (soundEffects) {
+      playSound(FART_SOUND, 1, 1.5);
+    }
+  };
+
   const playUnlockDoorSound = () => {
     if (soundEffects) {
       playSound(UNLOCKDOOR_SOUND, 1, 2);
@@ -53,5 +60,6 @@ export function useSounds(soundEffects) {
     playLevelCompleteSound,
     playStepSound,
     playUnlockDoorSound,
+    playFartSound,
   };
 }

@@ -19,6 +19,7 @@ export const KEY_SOUND = "/sounds/Key.wav";
 export const LEVELCOMPLETE_SOUND = "/sounds/LevelComplete.wav";
 export const STEP_SOUND = "/sounds/Step.wav";
 export const UNLOCKDOOR_SOUND = "/sounds/UnlockDoor.wav";
+export const FART_SOUND = "/sounds/Fart.mp3";
 
 //all music tracks
 export const TITLE_TRACK = "/music/Retro Game Music 8-bit Arcade.mp3";

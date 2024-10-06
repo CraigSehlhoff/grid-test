@@ -9,7 +9,6 @@ export default function WorldComponent({ grid, billySux, tileSet, poop }) {
             const TileComponent = tileSet[cell];
             return (
               <div key={cellIndex} className={`grid-cell ${cell}`}>
-                {/* Render each tile, passing poop as a prop */}
                 {typeof TileComponent === "function" ? (
                   <TileComponent poop={poop} />
                 ) : (

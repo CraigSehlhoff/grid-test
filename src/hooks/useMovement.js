@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
 import { BLOCKING_TILES } from "../constants";
-import { useSwipeControls } from "./useSwipeControls";
 
 const UP_KEYS = ["w", "ArrowUp"];
 const DOWN_KEYS = ["s", "ArrowDown"];
@@ -28,6 +27,8 @@ export function useMovement({
   playUnlockDoorSound,
   playStepSound,
   playLevelCompleteSound,
+  playFartSound,
+  poop,
 }) {
   /*
    * Should check if the key thats being pressed is mapped to a specific direction,
@@ -40,19 +41,19 @@ export function useMovement({
 
     if (UP_KEYS.includes(e.key)) {
       newRow = Math.max(0, row - 1);
-      playStepSound();
+      poop ? playFartSound() : playStepSound();
     }
     if (LEFT_KEYS.includes(e.key)) {
       newCol = Math.max(0, col - 1);
-      playStepSound();
+      poop ? playFartSound() : playStepSound();
     }
     if (RIGHT_KEYS.includes(e.key)) {
       newCol = Math.min(grid[0].length - 1, col + 1);
-      playStepSound();
+      poop ? playFartSound() : playStepSound();
     }
     if (DOWN_KEYS.includes(e.key)) {
       newRow = Math.min(grid.length - 1, row + 1);
-      playStepSound();
+      poop ? playFartSound() : playStepSound();
     }
 
     const newCell = grid[newRow][newCol];
@@ -115,10 +116,6 @@ export function useMovement({
       playLevelCompleteSound();
     }
   };
-
-  let movePlayer = handleKeyPress;
-
-  useSwipeControls(movePlayer);
 
   useEffect(() => {
     window.addEventListener("keydown", handleKeyPress);

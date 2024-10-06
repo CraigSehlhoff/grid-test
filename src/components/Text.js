@@ -27,6 +27,7 @@ export const Text = {
     World24: "Ah...do you go back for the coins or just leave?",
     World25: "...Careful now...",
     World3: "No shot that's a button...I wonder what it does?",
+    World32: "Oh alright...the button removes the block. Neat.",
     World4: "Oh look...your inventory is back!",
     World45: "I think this is it! Oh...I hope you have enough steps left...",
   },

@@ -317,7 +317,6 @@ dialog {
 
 .key {
   animation: rotateAndScaleKey 20s infinite ease-in-out;
-  /* background-color: aqua; */
 }
 
 .three-0,
@@ -365,7 +364,8 @@ dialog {
   padding-bottom: 20px;
   margin-left: auto;
   margin-right: auto;
-  width: fit-content;
+  width: 400px;
+  height: 300px;
 }
 
 .winning-win {
@@ -386,5 +386,15 @@ dialog {
   letter-spacing: 0.5px;
   display: inline-block;
   margin-top: 30px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.winning-button-poop {
+  border-radius: 5px;
+  width: 200px;
+  height: 25px;
+  letter-spacing: 0.5px;
+  display: inline-block;
+  margin-top: 10px;
   font-family: "Courier New", Courier, monospace;
 }

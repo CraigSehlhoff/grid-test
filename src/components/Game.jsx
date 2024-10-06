@@ -39,6 +39,7 @@ export default function Game({
     playLevelCompleteSound,
     playStepSound,
     playUnlockDoorSound,
+    playFartSound,
   } = useSounds(soundEffects);
 
   const openSettings = () => {
@@ -146,6 +147,8 @@ export default function Game({
     playUnlockDoorSound,
     playStepSound,
     playLevelCompleteSound,
+    playFartSound,
+    poop: poop,
   });
 
   //hook for text to be displayed
@@ -226,7 +229,7 @@ export default function Game({
               {score === 81 && <h3>You unlocked a new skin!!!</h3>}
               {score === 81 ? (
                 <button
-                  className="winning-button"
+                  className="winning-button-poop"
                   onClick={() => {
                     setCurrentLevelIndex(0);
                     setGrid(levels[0].grid);

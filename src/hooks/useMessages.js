@@ -64,6 +64,7 @@ export function useMessages({ score, currentLevelIndex, showMessages }) {
     if (currentLevelIndex === 8) toast.info(Text.world.World24);
     if (currentLevelIndex === 9) toast.warning(Text.world.World25);
     if (currentLevelIndex === 10) toast.info(Text.world.World3);
+    if (currentLevelIndex === 11) toast.info(Text.world.World32);
     if (currentLevelIndex === 15) toast.info(Text.world.World4);
     if (currentLevelIndex === 19) toast.warning(Text.world.World45);
   }, [currentLevelIndex, showMessages]);
