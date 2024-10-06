@@ -280,5 +280,6 @@ export default function Game({
 //-figure out MOBILE!!!
 //-UNDER 10 MB?!?!?!
 //WHATS WRONG WITH MY GIT???
+//UPDATE README
 
 //youve got this dude...lets wrap this shit up today!!!
