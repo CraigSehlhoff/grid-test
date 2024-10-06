@@ -275,9 +275,7 @@ export default function Game({
 
 //well...here we are...home stretch kinda lets just map out what else has to be done...
 //essential things
-//music has to be added per world...this could be easy?
-//also check the music vs sound effect volume levels...does it work?
-//-styling! (this wont be as bad as you think)
+
 //-figure out rune/dusk
 //-figure out MOBILE!!!
 //-UNDER 10 MB?!?!?!

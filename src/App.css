@@ -56,12 +56,23 @@ body {
   width: 120px;
   border-radius: 60px;
   margin-bottom: 20px;
+  font-family: "Courier New", Courier, monospace;
 }
 
 .title-screen-settings {
   height: 45px;
   width: 120px;
   border-radius: 60px;
+  font-family: "Courier New", Courier, monospace;
+}
+
+.title-screen-music-button {
+  font-family: "Courier New", Courier, monospace;
+  border-radius: 60px;
+  margin-top: auto;
+  margin-bottom: 20px;
+  font-size: 0.5rem;
+  background-color: rgba(255, 255, 255, 0.602);
 }
 
 .settings-dialog {

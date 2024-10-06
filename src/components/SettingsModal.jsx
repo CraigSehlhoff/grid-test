@@ -25,10 +25,6 @@ export const SettingsModal = React.forwardRef(
               Sound Effects
             </label>
             <label>
-              <input type="checkbox" />
-              Music
-            </label>
-            <label>
               <input
                 type="checkbox"
                 checked={showMessages}

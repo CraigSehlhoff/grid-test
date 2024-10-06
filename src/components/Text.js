@@ -2,7 +2,7 @@ export const Text = {
   score: {
     initial: "Wow you collected a coin!",
     five: "You must like these things or something...",
-    ten: "Is it the way that they're spinning and slightly growing?",
+    ten: "Is it the way that the coins are spinning and slightly growing?",
     fifteen: "Or maybe its because they're gold coins?",
     twenty:
       "Okay fine...maybe something cool will happen if you collect all of the coins",
