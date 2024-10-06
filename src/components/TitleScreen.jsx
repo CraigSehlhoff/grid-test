@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import Game from "./Game";
-import { TITLE_TRACK } from "../constants";
+import { TITLE_TRACK, BOX_ART } from "../constants";
 import { SettingsModal } from "./SettingsModal";
 
 export default function TitleScreen({ showMessages, setShowMessages }) {
@@ -54,10 +54,13 @@ export default function TitleScreen({ showMessages, setShowMessages }) {
     <div className="title-screen-main-container">
       {isModalOpen && (
         <dialog className="title-screen-dialog" open>
-          <p className="title-screen-dialog-text">Welcome to my game!</p>
-          <button className="title-screen-dialog-button" onClick={closeModal}>
-            Enter
-          </button>
+          <div className="title-screen-dialog-container">
+            <p className="title-screen-dialog-text">Welcome to my game!</p>
+            <img className="title-screen-dialog-boxart" src={BOX_ART} />
+            <button className="title-screen-dialog-button" onClick={closeModal}>
+              Enter
+            </button>
+          </div>
         </dialog>
       )}
       <h1 className="title-screen-title">RETRO MAZE RUNNER</h1>

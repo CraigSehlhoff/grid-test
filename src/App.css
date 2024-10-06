@@ -50,16 +50,30 @@ body {
   margin-top: 20px;
   height: 600px;
   width: 400px;
-  background-color: rgba(255, 255, 255, 0.833);
+  background-color: rgba(255, 255, 255, 0.975);
   color: blue;
 }
 
 .title-screen-dialog-text {
-  margin-top: 200px;
-  margin-left: 80px;
+  margin-top: 100px;
   font-weight: 800;
   font-size: 1.3rem;
   margin-bottom: 50px;
+}
+
+.title-screen-dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.title-screen-dialog-boxart {
+  width: 250px;
+  height: 200px;
+  opacity: 0.8;
+  margin-bottom: 50px;
+  border-radius: 10px;
 }
 
 .title-screen-dialog-button {
@@ -67,7 +81,8 @@ body {
   border-radius: 5px;
   width: 200px;
   height: 50px;
-  margin-left: 95px;
+  letter-spacing: 5px;
+  font-weight: bold;
 }
 
 .title-screen-title {

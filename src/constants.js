@@ -12,6 +12,7 @@ export const RED_BLOCK = "/images/RedBlock.png";
 export const BLUE_BUTTON = "/images/BlueUp.png";
 export const BLUE_BLOCK = "/images/BlueBlock.png";
 export const POOP = "/images/Poop.png";
+export const BOX_ART = "/images/boxArt.png";
 
 //all sound assets
 export const COIN_SOUND = "/sounds/Coin.wav";
