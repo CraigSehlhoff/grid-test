@@ -191,7 +191,10 @@ export default function Game({
           )}
           <button
             className="restart-world-button"
-            onClick={() => setGameOver(true)}
+            onClick={() => {
+              setGameOver(true);
+              setP1Pos({ row: 0, col: 0 });
+            }}
           >
             Restart World?
           </button>
