@@ -189,7 +189,12 @@ export default function Game({
               Steps Remaining: {currentWorldSteps - steps}
             </div>
           )}
-
+          <button
+            className="restart-world-button"
+            onClick={() => setGameOver(true)}
+          >
+            Restart World?
+          </button>
           <dialog ref={gameOverDialogRef} className="gameover-dialog">
             <div className="gameover-container">
               <h2 className="gameover-title">Game Over</h2>
